@@ -1,4 +1,4 @@
-import 'package:discord_clon_app/config/helpers/eight_ball_response.dart';
+import 'package:discord_clon_app/config/helpers/apis_responses.dart';
 import 'package:discord_clon_app/domain/entities/message.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +26,7 @@ class ChatProvider extends ChangeNotifier {
   }
 
   Future<void> herResponse() async {
-    final Message herResponse = await EightBallResponse().getResponse();
+    final Message herResponse = await APIsResponses().getResponse();
     messages.add(herResponse);
     notifyListeners();
     moveScrollToBottom();

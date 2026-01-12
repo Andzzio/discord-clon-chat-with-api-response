@@ -10,9 +10,12 @@ class HerMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           herCircleAvatar,
           SizedBox(width: 15),
@@ -24,6 +27,30 @@ class HerMessage extends StatelessWidget {
                 style: TextStyle(color: textColor, fontWeight: FontWeight.bold),
               ),
               Text(message.text, style: TextStyle(color: textColor)),
+              SizedBox(height: 10),
+              ClipRRect(
+                borderRadius: BorderRadiusGeometry.circular(10),
+                child: Image(
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Container(
+                      decoration: BoxDecoration(color: bgColor),
+                      width: size.width * 0.5,
+                      height: 150,
+                      child: CircularProgressIndicator(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 80,
+                          vertical: 50,
+                        ),
+                      ),
+                    );
+                  },
+                  image: NetworkImage(message.imgUrl!),
+                  width: size.width * 0.5,
+                  height: 150,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ],
           ),
         ],
