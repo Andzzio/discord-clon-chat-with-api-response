@@ -74,32 +74,7 @@ class ChatScreen extends StatelessWidget {
                         child: ListView.builder(
                           itemCount: 100,
                           itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  herCircleAvatar,
-                                  SizedBox(width: 15),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Happcat",
-                                        style: TextStyle(
-                                          color: textColor,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Hola amor $index",
-                                        style: TextStyle(color: textColor),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
+                            return HerMessage();
                           },
                         ),
                       ),
@@ -148,6 +123,7 @@ class ChatScreen extends StatelessWidget {
                             hintText: "Enviar mensaje a @Happcat",
                           ),
                           style: TextStyle(color: textColor),
+                          onSubmitted: (value) {},
                         ),
                       ),
                     ],
@@ -157,6 +133,33 @@ class ChatScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class HerMessage extends StatelessWidget {
+  const HerMessage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          herCircleAvatar,
+          SizedBox(width: 15),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Happcat",
+                style: TextStyle(color: textColor, fontWeight: FontWeight.bold),
+              ),
+              Text("Hola amor", style: TextStyle(color: textColor)),
+            ],
+          ),
+        ],
       ),
     );
   }
