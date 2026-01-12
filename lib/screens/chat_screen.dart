@@ -1,6 +1,6 @@
 import 'package:discord_clon_app/domain/entities/message.dart';
 import 'package:discord_clon_app/providers/chat_provider.dart';
-import 'package:discord_clon_app/theme/colors.dart';
+import 'package:discord_clon_app/config/theme/colors.dart';
 import 'package:discord_clon_app/utils/profile_pictures.dart';
 import 'package:discord_clon_app/widgets/her_message.dart';
 import 'package:discord_clon_app/widgets/my_message.dart';

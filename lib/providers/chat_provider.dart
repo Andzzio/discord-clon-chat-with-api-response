@@ -1,12 +1,9 @@
+import 'package:discord_clon_app/config/helpers/eight_ball_response.dart';
 import 'package:discord_clon_app/domain/entities/message.dart';
 import 'package:flutter/material.dart';
 
 class ChatProvider extends ChangeNotifier {
-  List<Message> messages = [
-    Message(text: "Hola amor", fromWho: FromWho.fromHer),
-    Message(text: "Hola!!!", fromWho: FromWho.fromMe),
-    Message(text: "Como estás", fromWho: FromWho.fromMe),
-  ];
+  List<Message> messages = [];
 
   final TextEditingController fieldController = TextEditingController();
   final FocusNode fieldFocus = FocusNode();
@@ -14,15 +11,25 @@ class ChatProvider extends ChangeNotifier {
   final ScrollController scrollController = ScrollController();
 
   Future<void> sendMessage(String text) async {
-    if (fieldController.text.isEmpty) {
+    if (text.isEmpty) {
       return;
     }
     final Message newMessage = Message(text: text, fromWho: FromWho.fromMe);
     messages.add(newMessage);
+    if (text.endsWith("?")) {
+      herResponse();
+    }
     notifyListeners();
     fieldController.clear();
     moveScrollToBottom();
     fieldFocus.requestFocus();
+  }
+
+  Future<void> herResponse() async {
+    final Message herResponse = await EightBallResponse().getResponse();
+    messages.add(herResponse);
+    notifyListeners();
+    moveScrollToBottom();
   }
 
   Future<void> moveScrollToBottom() async {

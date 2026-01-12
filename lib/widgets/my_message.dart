@@ -1,5 +1,5 @@
 import 'package:discord_clon_app/domain/entities/message.dart';
-import 'package:discord_clon_app/theme/colors.dart';
+import 'package:discord_clon_app/config/theme/colors.dart';
 import 'package:discord_clon_app/utils/profile_pictures.dart';
 import 'package:flutter/material.dart';
 
