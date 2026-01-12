@@ -122,7 +122,13 @@ class ChatScreen extends StatelessWidget {
                             hintText: "Enviar mensaje a @Happcat",
                           ),
                           style: TextStyle(color: textColor),
-                          onSubmitted: (value) {},
+                          controller: chatProvider.fieldController,
+                          focusNode: chatProvider.fieldFocus,
+                          onSubmitted: (value) {
+                            chatProvider.sendMessage(
+                              chatProvider.fieldController.text,
+                            );
+                          },
                         ),
                       ),
                     ],
