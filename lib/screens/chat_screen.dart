@@ -64,6 +64,7 @@ class ChatScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListView.builder(
+                          controller: chatProvider.scrollController,
                           itemCount: chatProvider.messages.length,
                           itemBuilder: (BuildContext context, int index) {
                             return (chatProvider.messages[index].fromWho ==
