@@ -1,26 +1,18 @@
+import 'package:discord_clon_app/domain/entities/message.dart';
+import 'package:discord_clon_app/providers/chat_provider.dart';
+import 'package:discord_clon_app/theme/colors.dart';
+import 'package:discord_clon_app/utils/profile_pictures.dart';
+import 'package:discord_clon_app/widgets/her_message.dart';
+import 'package:discord_clon_app/widgets/my_message.dart';
 import 'package:flutter/material.dart';
-
-const Color textColor = Color(0xFF9BA8C1);
-const Color iconDisabledColor = Color(0xFF393F4A);
-const Color bgColor = Color(0xFF22242A);
-const Color contColor = Color(0xFF1C1E23);
-
-const CircleAvatar herCircleAvatar = CircleAvatar(
-  backgroundImage: NetworkImage(
-    "https://i.pinimg.com/736x/e9/fa/c7/e9fac7b9eb8bfac606096e484646ed75.jpg",
-  ),
-);
-const CircleAvatar myCircleAvatar = CircleAvatar(
-  backgroundImage: NetworkImage(
-    "https://cdn2.steamgriddb.com/icon/1dd65ed9f9389685df58b32c1adb4692/32/256x256.png",
-  ),
-);
+import 'package:provider/provider.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ChatProvider chatProvider = context.watch<ChatProvider>();
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
@@ -72,9 +64,16 @@ class ChatScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListView.builder(
-                          itemCount: 100,
+                          itemCount: chatProvider.messages.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return HerMessage();
+                            return (chatProvider.messages[index].fromWho ==
+                                    FromWho.fromHer
+                                ? HerMessage(
+                                    message: chatProvider.messages[index],
+                                  )
+                                : MyMessage(
+                                    message: chatProvider.messages[index],
+                                  ));
                           },
                         ),
                       ),
@@ -133,33 +132,6 @@ class ChatScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class HerMessage extends StatelessWidget {
-  const HerMessage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          herCircleAvatar,
-          SizedBox(width: 15),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Happcat",
-                style: TextStyle(color: textColor, fontWeight: FontWeight.bold),
-              ),
-              Text("Hola amor", style: TextStyle(color: textColor)),
-            ],
-          ),
-        ],
       ),
     );
   }
